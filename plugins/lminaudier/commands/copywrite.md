@@ -1,5 +1,5 @@
 ---
-name: lminaudier:write
+name: lminaudier:copywrite
 description: Write, draft, review, or improve a business document (email, report, proposal, message, etc.) using Mark Morris's Better Business Writing Skills methodology.
 argument-hint: [document to review or description of what to write]
 allowed-tools:

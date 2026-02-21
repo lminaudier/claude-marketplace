@@ -14,4 +14,4 @@ Personal Claude Code extension hub by lminaudier.
 | Command | Description |
 |---|---|
 | `/lminaudier:commit` | Guide through committing staged or unstaged changes using conventional commits, small focused commits, and meaningful "why" explanations. |
-| `/lminaudier:write` | Write, draft, review, or improve a business document using Mark Morris's Better Business Writing Skills methodology. |
+| `/lminaudier:copywrite` | Write, draft, review, or improve a business document using Mark Morris's Better Business Writing Skills methodology. |
