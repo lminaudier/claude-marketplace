@@ -1,0 +1,13 @@
+{
+  "name": "lminaudier",
+  "version": "1.0.0",
+  "description": "Personal Claude Code extensions",
+  "author": {
+    "name": "lminaudier",
+    "url": "https://github.com/lminaudier"
+  },
+  "homepage": "https://github.com/lminaudier/claude-marketplace",
+  "repository": "https://github.com/lminaudier/claude-marketplace",
+  "license": "MIT",
+  "keywords": ["personal", "productivity"]
+}
