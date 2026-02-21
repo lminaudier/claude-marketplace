@@ -1,0 +1,117 @@
+name: Validate Plugins
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate marketplace.json exists
+        run: |
+          if [ ! -f ".claude-plugin/marketplace.json" ]; then
+            echo "ERROR: .claude-plugin/marketplace.json not found"
+            exit 1
+          fi
+          echo "marketplace.json found"
+
+      - name: Validate marketplace.json is valid JSON
+        run: |
+          if ! jq empty .claude-plugin/marketplace.json 2>/dev/null; then
+            echo "ERROR: .claude-plugin/marketplace.json is not valid JSON"
+            exit 1
+          fi
+          echo "marketplace.json is valid JSON"
+
+      - name: Validate marketplace required fields
+        run: |
+          NAME=$(jq -r '.name // empty' .claude-plugin/marketplace.json)
+          OWNER=$(jq -r '.owner.name // empty' .claude-plugin/marketplace.json)
+          PLUGINS=$(jq -r '.plugins // empty' .claude-plugin/marketplace.json)
+
+          if [ -z "$NAME" ]; then
+            echo "ERROR: marketplace.json missing 'name' field"
+            exit 1
+          fi
+          if [ -z "$OWNER" ]; then
+            echo "ERROR: marketplace.json missing 'owner.name' field"
+            exit 1
+          fi
+          if [ "$PLUGINS" = "null" ] || [ -z "$PLUGINS" ]; then
+            echo "ERROR: marketplace.json missing 'plugins' array"
+            exit 1
+          fi
+          echo "Required fields present: name=$NAME, owner=$OWNER"
+
+      - name: Check for duplicate plugin names
+        run: |
+          DUPLICATES=$(jq -r '[.plugins[].name] | group_by(.) | map(select(length > 1)) | .[].[]' .claude-plugin/marketplace.json)
+          if [ -n "$DUPLICATES" ]; then
+            echo "ERROR: Duplicate plugin names found: $DUPLICATES"
+            exit 1
+          fi
+          echo "No duplicate plugin names"
+
+      - name: Validate each plugin entry and its plugin.json
+        run: |
+          PLUGIN_COUNT=$(jq '.plugins | length' .claude-plugin/marketplace.json)
+          echo "Validating $PLUGIN_COUNT plugin(s)..."
+
+          for i in $(seq 0 $((PLUGIN_COUNT - 1))); do
+            PLUGIN_NAME=$(jq -r ".plugins[$i].name" .claude-plugin/marketplace.json)
+            PLUGIN_SOURCE=$(jq -r ".plugins[$i].source" .claude-plugin/marketplace.json)
+
+            echo "Checking plugin: $PLUGIN_NAME (source: $PLUGIN_SOURCE)"
+
+            # Resolve relative source path
+            PLUGIN_DIR="${PLUGIN_SOURCE#./}"
+
+            if [ ! -d "$PLUGIN_DIR" ]; then
+              echo "ERROR: Plugin directory not found: $PLUGIN_DIR"
+              exit 1
+            fi
+
+            PLUGIN_JSON="$PLUGIN_DIR/.claude-plugin/plugin.json"
+            if [ ! -f "$PLUGIN_JSON" ]; then
+              echo "ERROR: plugin.json not found at $PLUGIN_JSON"
+              exit 1
+            fi
+
+            if ! jq empty "$PLUGIN_JSON" 2>/dev/null; then
+              echo "ERROR: $PLUGIN_JSON is not valid JSON"
+              exit 1
+            fi
+
+            # Validate plugin.json required fields
+            P_NAME=$(jq -r '.name // empty' "$PLUGIN_JSON")
+            P_VERSION=$(jq -r '.version // empty' "$PLUGIN_JSON")
+            P_DESC=$(jq -r '.description // empty' "$PLUGIN_JSON")
+
+            if [ -z "$P_NAME" ]; then
+              echo "ERROR: $PLUGIN_JSON missing 'name' field"
+              exit 1
+            fi
+            if [ -z "$P_VERSION" ]; then
+              echo "ERROR: $PLUGIN_JSON missing 'version' field"
+              exit 1
+            fi
+            if [ -z "$P_DESC" ]; then
+              echo "ERROR: $PLUGIN_JSON missing 'description' field"
+              exit 1
+            fi
+
+            # Verify plugin name matches marketplace entry
+            if [ "$P_NAME" != "$PLUGIN_NAME" ]; then
+              echo "ERROR: plugin.json name '$P_NAME' doesn't match marketplace entry '$PLUGIN_NAME'"
+              exit 1
+            fi
+
+            echo "  Plugin $PLUGIN_NAME validated successfully"
+          done
+
+          echo "All plugins validated successfully"
