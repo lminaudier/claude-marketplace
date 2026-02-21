@@ -33,7 +33,7 @@ Skills are then invocable as `/lminaudier:<skill-name>`.
         ├── .claude-plugin/
         │   └── plugin.json
         ├── README.md
-        ├── skills/               ← SKILL.md files → /lminaudier:<name>
+        ├── skills/               ← skill dirs, each with SKILL.md → /lminaudier:<name>
         ├── agents/               ← subagent definitions
         ├── hooks/                ← hook implementations
         └── commands/             ← slash command markdown files
@@ -41,7 +41,9 @@ Skills are then invocable as `/lminaudier:<skill-name>`.
 
 ## Adding content
 
-- **Skills**: Add `*.md` files to `plugins/lminaudier/skills/`
+- **Skills**: Create `plugins/lminaudier/skills/<name>/SKILL.md` (directory + file, not a flat .md)
 - **Agents**: Add agent definitions to `plugins/lminaudier/agents/`
 - **Hooks**: Add hook scripts to `plugins/lminaudier/hooks/`
 - **Commands**: Add slash command markdown files to `plugins/lminaudier/commands/`
+
+After adding content, run `/plugin update lminaudier@lminaudier-claude-marketplace` to pick up changes.
