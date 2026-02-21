@@ -1,0 +1,21 @@
+{
+  "name": "lminaudier-claude-marketplace",
+  "owner": {
+    "name": "lminaudier",
+    "email": "lminaudier@users.noreply.github.com"
+  },
+  "metadata": {
+    "description": "Personal Claude Code extensions by lminaudier",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "lminaudier",
+      "source": "./plugins/lminaudier",
+      "version": "1.0.0",
+      "description": "Personal Claude Code extensions",
+      "author": { "name": "lminaudier" },
+      "tags": ["personal", "productivity"]
+    }
+  ]
+}
