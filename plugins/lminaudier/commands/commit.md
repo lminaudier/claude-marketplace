@@ -1,18 +1,16 @@
 ---
-name: commit
-description: Use this skill when the user asks to commit changes, create a git commit, or runs /commit. Guides through conventional commits with small focused commits and meaningful "why" explanations.
-version: 1.0.0
+name: lminaudier:commit
+description: Guide through committing staged or unstaged changes using conventional commits, small focused commits, and meaningful "why" explanations.
+argument-hint: [optional context or message hint]
+allowed-tools:
+  - Bash
+  - Read
+  - AskUserQuestion
 ---
 
-# Skill: commit
+Guide the user through committing code changes to git. Follow these principles strictly.
 
-Guide the user through committing staged or unstaged changes using conventional commits, small focused commits, and meaningful "why" explanations in commit messages.
-
-## Instructions
-
-You are helping the user commit code changes to git. Follow these principles strictly:
-
-### Conventional Commits format
+## Conventional Commits format
 
 Every commit message MUST follow this structure:
 ```
@@ -44,7 +42,7 @@ Every commit message MUST follow this structure:
 - What was the trade-off or decision made?
 - Never just describe what the diff shows — the diff already shows that.
 
-### Small, focused commits
+## Small, focused commits
 
 Before committing, inspect the staged/unstaged changes:
 1. Run `git status` and `git diff --stat HEAD` to understand the scope
@@ -52,7 +50,7 @@ Before committing, inspect the staged/unstaged changes:
 3. Each commit should represent one logical change that can be understood, reviewed, and reverted independently
 4. A good rule of thumb: if the commit message needs "and" to describe what changed, it should probably be two commits
 
-### Workflow
+## Workflow
 
 1. Run `git status` to see what's staged and unstaged
 2. Run `git diff` (and `git diff --cached` if there are staged changes) to read the actual changes
@@ -71,7 +69,7 @@ Before committing, inspect the staged/unstaged changes:
    ```
 8. Show the result of `git log --oneline -3` so the user can confirm the commit looks right
 
-### Guardrails
+## Guardrails
 
 - Never commit files that likely contain secrets (.env, credentials, private keys). Warn the user if any are staged.
 - Never use `--no-verify` unless the user explicitly requests it.
