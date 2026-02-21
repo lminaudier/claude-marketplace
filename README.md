@@ -9,9 +9,9 @@ Personal Claude Code extension hub by lminaudier.
 /plugin install lminaudier@lminaudier-claude-marketplace
 ```
 
-## Available extensions
+## Commands
 
-- **Skills** (`plugins/lminaudier/skills/`) — context injected into Claude automatically; invoked implicitly based on description
-- **Commands** (`plugins/lminaudier/commands/`) — slash commands invocable as `/lminaudier:<name>`
-- **Agents** (`plugins/lminaudier/agents/`) — subagent definitions
-- **Hooks** (`plugins/lminaudier/hooks/`) — scripts that run on Claude Code hook events
+| Command | Description |
+|---|---|
+| `/lminaudier:commit` | Guide through committing staged or unstaged changes using conventional commits, small focused commits, and meaningful "why" explanations. |
+| `/lminaudier:write` | Write, draft, review, or improve a business document using Mark Morris's Better Business Writing Skills methodology. |
