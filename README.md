@@ -11,9 +11,9 @@ Personal Claude Code extension hub by lminaudier.
 
 Skills are then invocable as `/lminaudier:<skill-name>`.
 
-> Before the repo is public, register via local path:
+> If the repo is private, register via SSH:
 > ```
-> /plugin marketplace add ~/Claude
+> /plugin marketplace add git@github.com:lminaudier/claude-marketplace.git
 > /plugin install lminaudier@lminaudier-claude-marketplace
 > ```
 
