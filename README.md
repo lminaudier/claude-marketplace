@@ -24,3 +24,13 @@ Skills are model-invocable — Claude applies them automatically when relevant, 
 | Skill | Description |
 |---|---|
 | `ast-grep` | Structural code search using AST patterns. Activated when searching for code constructs beyond what text search can handle. |
+| `bear` | Interact with Bear notes via `bcli`. Activated when the user mentions Bear notes, wants to find, read, create, edit, or manage notes and todos. |
+
+## Dependencies
+
+Some skills require external tools to be installed on the machine.
+
+| Tool | Required by | Install |
+|---|---|---|
+| [`ast-grep`](https://ast-grep.github.io) | `ast-grep` skill | `brew install ast-grep` |
+| [`bcli`](https://github.com/mreider/better-bear-cli) | `bear` skill | `brew install mreider/tap/bcli` |
