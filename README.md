@@ -25,6 +25,8 @@ Skills are model-invocable — Claude applies them automatically when relevant, 
 |---|---|
 | `ast-grep` | Structural code search using AST patterns. Activated when searching for code constructs beyond what text search can handle. |
 | `bear` | Interact with Bear notes via `bcli`. Activated when the user mentions Bear notes, wants to find, read, create, edit, or manage notes and todos. |
+| `confluence` | Read, search, create, update, move, and delete Confluence pages and attachments via `confluence-cli`. |
+| `pup` | Interact with the Datadog observability platform via `pup`. Activated for metrics, logs, monitors, dashboards, incidents, SLOs, and more. |
 
 ## Dependencies
 
@@ -34,3 +36,5 @@ Some skills require external tools to be installed on the machine.
 |---|---|---|
 | [`ast-grep`](https://ast-grep.github.io) | `ast-grep` skill | `brew install ast-grep` |
 | [`bcli`](https://github.com/mreider/better-bear-cli) | `bear` skill | `brew install mreider/tap/bcli` |
+| [`confluence-cli`](https://www.npmjs.com/package/confluence-cli) | `confluence` skill | `npm install -g confluence-cli` |
+| [`pup`](https://github.com/datadog-labs/pup) | `pup` skill | See [pup installation docs](https://github.com/datadog-labs/pup#installation) |
