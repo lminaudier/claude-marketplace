@@ -5,7 +5,6 @@ argument-hint: [optional context or message hint]
 allowed-tools:
   - Bash
   - Read
-  - AskUserQuestion
 ---
 
 Guide the user through committing code changes to git. Follow these principles strictly.
@@ -55,9 +54,9 @@ Before committing, inspect the staged/unstaged changes:
 1. Run `git status` to see what's staged and unstaged
 2. Run `git diff` (and `git diff --cached` if there are staged changes) to read the actual changes
 3. Assess whether the changes form a single logical unit or should be split
-4. If splitting is warranted, tell the user what groupings you suggest and why — ask for confirmation before staging selectively
+4. If splitting is warranted, stage and commit each group independently using your best judgment
 5. Draft a commit message following the conventional commits format
-6. Explain the "why" you inferred from the diff — ask the user to confirm or correct your interpretation before committing
+6. Infer the "why" from the diff and encode it directly in the commit body
 7. Execute the commit using a HEREDOC to preserve formatting:
    ```bash
    git commit -m "$(cat <<'EOF'
