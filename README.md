@@ -27,6 +27,7 @@ Skills are model-invocable — Claude applies them automatically when relevant, 
 | `bear` | Interact with Bear notes via `bcli`. Activated when the user mentions Bear notes, wants to find, read, create, edit, or manage notes and todos. |
 | `confluence` | Read, search, create, update, move, and delete Confluence pages and attachments via `confluence-cli`. |
 | `pup` | Interact with the Datadog observability platform via `pup`. Activated for metrics, logs, monitors, dashboards, incidents, SLOs, and more. |
+| `taskwarrior` | Manage tasks using the `task` CLI. Activated when the user wants to add, list, complete, filter, or manage tasks and to-dos. |
 
 ## Dependencies
 
@@ -38,3 +39,4 @@ Some skills require external tools to be installed on the machine.
 | [`bcli`](https://github.com/mreider/better-bear-cli) | `bear` skill | `brew install mreider/tap/bcli` |
 | [`confluence-cli`](https://www.npmjs.com/package/confluence-cli) | `confluence` skill | `npm install -g confluence-cli` |
 | [`pup`](https://github.com/datadog-labs/pup) | `pup` skill | See [pup installation docs](https://github.com/datadog-labs/pup#installation) |
+| [`task`](https://taskwarrior.org) | `taskwarrior` skill | `brew install task` |
